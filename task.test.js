@@ -1,4 +1,7 @@
-const {studentScores, scoreIncrease, square,booksDistribution,timings,expensesTracking} = require ("./task.js");
+const {studentScores, scoreIncrease, square,
+    booksDistribution,timings,expensesTracking,
+    letterGrade,sort_and_displayList} = require ("./task.js");
+
 test("to check that studentscore returns correct result",()=>{
     let scores =  [20,50,77,80,10];
     let result = [77,80];
@@ -52,4 +55,16 @@ test("test that letterGrade function works",()=>{
     let expected = ["D","C","B","A","F"]
     let result = letterGrade(array)
     expect(expected).toEqual(result)
+})
+
+
+test("test that sort_and_displayList function works",()=>{
+    let shoppingList = [
+        { name: 'Apples', category: 'Fruits', isHealthy: true },
+        { name: 'Potato Chips', category: 'Snacks', isHealthy: false },
+        ];
+    let expected = "Apples";
+    let result = sort_and_displayList(shoppingList)
+    expect(result).toBe(expected)
+
 })
