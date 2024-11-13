@@ -1,6 +1,6 @@
 const {studentScores, scoreIncrease, square,
     booksDistribution,timings,expensesTracking,
-    letterGrade,sort_and_displayList} = require ("./task.js");
+    letterGrade,sort_and_displayList,orderFiltering, discountedPrice, discountedPriceContinued} = require ("./task.js");
 
 test("to check that studentscore returns correct result",()=>{
     let scores =  [20,50,77,80,10];
@@ -9,6 +9,7 @@ test("to check that studentscore returns correct result",()=>{
     expect(answer).toEqual(result);
 
 })
+
 
 test("to check that scoreIncrenment returns correct result ",()=>{
    let array = [20,30,70,71,60]
@@ -67,4 +68,46 @@ test("test that sort_and_displayList function works",()=>{
     let result = sort_and_displayList(shoppingList)
     expect(result).toBe(expected)
 
+})
+
+test("test that orderFiltering function works",()=>{
+    let orders = [
+        { id: 1, items: [{ price: 25, quantity: 2 }, { price: 15, quantity: 3 }] },
+        { id: 2, items: [{ price: 100, quantity: 1 }, { price: 25, quantity: 2 }] },
+        { id: 3, items: [{ price: 30, quantity: 1 }] }
+        ];
+    let expected =[
+        { id: 1, items: [{ price: 25, quantity: 2 }, { price: 15, quantity: 3 }] },
+        { id: 3, items: [{ price: 30, quantity: 1 }] }
+        ];
+    let result = orderFiltering(orders)
+    expect(result).toEqual(expected)
+
+
+})
+
+test("test that discountedPrice function works",()=>{
+    let products = [
+        { name: "Laptop", price: 1200 },
+        { name: "Phone", price: 600 },
+        { name: "Mouse", price: 25 },
+        { name: "Monitor", price: 200 }
+        ];
+    let expected = [
+        { name: "Laptop", price: 1200 },
+        { name: "Phone", price: 600 },
+        { name: "Monitor", price: 200 }
+        ];
+
+    let result = discountedPrice(products)
+    expect(result).toEqual(expected)
+
+        let expected2 =
+      [
+        { name: 'Laptop', price: 1200, 'discounted price': 1188 },
+        { name: 'Phone', price: 600, 'discounted price': 594 },
+        { name: 'Monitor', price: 200, 'discounted price': 198 }
+      ];
+    let result2 = discountedPriceContinued(expected)
+    expect(result2).toEqual(expected2)
 })

@@ -1,10 +1,13 @@
-let shoppingList = [
-    { name: 'Apples', category: 'Fruits', isHealthy: true },
-    { name: 'Potato Chips', category: 'Snacks', isHealthy: false },
-    { name: 'Carrots', category: 'Vegetables', isHealthy: true },
-    { name: 'Chocolate Bars', category: 'Sweets', isHealthy: false },
-    { name: 'Greek Yogurt', category: 'Dairy', isHealthy: true },
-    { name: 'Soda', category: 'Beverages', isHealthy: false }
+const orders = [
+{ id: 1, items: [{ price: 25, quantity: 2 }, { price: 15, quantity: 3 }] },
+{ id: 2, items: [{ price: 100, quantity: 1 }, { price: 25, quantity: 2 }] },
+{ id: 3, items: [{ price: 30, quantity: 1 }] },
+];
+const products = [
+    { name: "Laptop", price: 1200 },
+    { name: "Phone", price: 600 },
+    { name: "Mouse", price: 25 },
+    { name: "Monitor", price: 200 }
     ];
 
 const  studentScores = (array)=>{
@@ -26,24 +29,25 @@ const square = (array)=>{
     return result
 }
 
-let books = ["amazon","History"]
-let names = ["ada","peter"]
-function booksDistribution (books,names){
-    let bookCollection = []
-    let collection = {
-        "Name": null,
-        "Book": null
-    }
-    for (let people of names){
-        collection.Name = people
-        for(let book of books){
-            collection.Book = book
-        }
-        bookCollection.push(collection)
+let books = ["amazon","History","48 laws of power"]
+let names = ["ada","peter","ifunanya"]
+const booksDistribution = (books, names)=> {
+    let bookCollection = [];
+    let bookIndex = 0;
+
+    for (let people of names) {
+        let collection = {
+            "Name": people,
+            "Book": books[bookIndex]
+        };
+        bookCollection.push(collection);
+        bookIndex++;
     }
 
-    return bookCollection
+    return bookCollection ;
 }
+booksDistribution(books, names);
+
 
 const timings =(times)=>{
     let afternoonClasses = times.filter((time)=>time.endsWith("PM"))
@@ -82,14 +86,51 @@ const sort_and_displayList = (shoppingList)=>{
     }
 }
 
+const orderFiltering = (orders)=>{
+let lessThan100$ = orders.filter((product)=>{
+        let orderCase = product.items;
+        let total = 0;
+
+        for(let count = 0; count < orderCase.length; count++) {
+            let p$qCase = orderCase[count]
+            let calc = p$qCase.price * p$qCase.quantity
+            total += calc;
+        }
+        return total < 100;
+    })
+        return lessThan100$
+
+}
+let result = orderFiltering(orders)
+function filteredOrderDisplay(result){
+    let output = ""
+    result.forEach((content)=>{
+        output +=`Item ID: ${content.id}\n`
+        content.items.forEach((content)=>{
+            output+= `\tTotal Cost of ${content.items}:  ${content.price * content.quantity}\n`
+        })
+    })
+    return output
+}
+filteredOrderDisplay(result)
+
+const discountedPrice = (products)=>{
+    let highCostProducts = products.filter((product)=>product.price > 50)
+    return highCostProducts
+}
+let printingDiscount = discountedPrice(products)
 
 
-
-
-
-
+const discountedPriceContinued = (printingDiscount)=>{
+    let discount = printingDiscount.map((content)=>{
+        let result = {...content,"discounted price": (content.price - (content.price * 0.01)) }
+        return result
+    })
+    return discount
+}
 
 
 module.exports = {studentScores, scoreIncrease,square
     , booksDistribution,timings,expensesTracking,
-    letterGrade,sort_and_displayList};
+    letterGrade,sort_and_displayList,orderFiltering, discountedPrice, discountedPriceContinued};
+//,discountedPrice
