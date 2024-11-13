@@ -1,14 +1,4 @@
-const orders = [
-{ id: 1, items: [{ price: 25, quantity: 2 }, { price: 15, quantity: 3 }] },
-{ id: 2, items: [{ price: 100, quantity: 1 }, { price: 25, quantity: 2 }] },
-{ id: 3, items: [{ price: 30, quantity: 1 }] },
-];
-const products = [
-    { name: "Laptop", price: 1200 },
-    { name: "Phone", price: 600 },
-    { name: "Mouse", price: 25 },
-    { name: "Monitor", price: 200 }
-    ];
+
 
 const  studentScores = (array)=>{
     let scores = array.filter((num)=> num >= 70)
@@ -29,8 +19,7 @@ const square = (array)=>{
     return result
 }
 
-let books = ["amazon","History","48 laws of power"]
-let names = ["ada","peter","ifunanya"]
+
 const booksDistribution = (books, names)=> {
     let bookCollection = [];
     let bookIndex = 0;
@@ -46,7 +35,6 @@ const booksDistribution = (books, names)=> {
 
     return bookCollection ;
 }
-booksDistribution(books, names);
 
 
 const timings =(times)=>{
@@ -56,13 +44,10 @@ const timings =(times)=>{
 
 const expensesTracking =(record)=>{
     total = 0
-    for(let money in record){
-        total+=record[money]
-    }
+    for(let money in record){total+=record[money]}
     return total
 }
 
-let array = [60,70,81,90,20]
 
 const letterGrade = (array)=>{
     let letters = array.map((num)=>{
@@ -75,7 +60,6 @@ const letterGrade = (array)=>{
     })
     return letters
 }
-letterGrade(array)
 
 
 const sort_and_displayList = (shoppingList)=>{
@@ -101,8 +85,9 @@ let lessThan100$ = orders.filter((product)=>{
         return lessThan100$
 
 }
-let result = orderFiltering(orders)
-function filteredOrderDisplay(result){
+
+const filteredOrderDisplay =(orders)=>{
+    let result = orderFiltering(orders)
     let output = ""
     result.forEach((content)=>{
         output +=`Item ID: ${content.id}\n`
@@ -112,16 +97,15 @@ function filteredOrderDisplay(result){
     })
     return output
 }
-filteredOrderDisplay(result)
 
 const discountedPrice = (products)=>{
     let highCostProducts = products.filter((product)=>product.price > 50)
     return highCostProducts
 }
-let printingDiscount = discountedPrice(products)
 
 
-const discountedPriceContinued = (printingDiscount)=>{
+const discountedPriceContinued = (products)=>{
+    let printingDiscount = discountedPrice(products)
     let discount = printingDiscount.map((content)=>{
         let result = {...content,"discounted price": (content.price - (content.price * 0.01)) }
         return result
@@ -132,5 +116,6 @@ const discountedPriceContinued = (printingDiscount)=>{
 
 module.exports = {studentScores, scoreIncrease,square
     , booksDistribution,timings,expensesTracking,
-    letterGrade,sort_and_displayList,orderFiltering, discountedPrice, discountedPriceContinued};
+    letterGrade,sort_and_displayList,orderFiltering,
+    discountedPrice, discountedPriceContinued};
 //,discountedPrice
